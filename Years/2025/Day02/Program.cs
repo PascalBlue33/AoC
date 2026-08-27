@@ -7,8 +7,8 @@ internal class Program
         System.Console.WriteLine("Advent of Code 2025 - Day 02");
 
         
-        System.Console.WriteLine("Part 1:" + Part1(input));
-        System.Console.WriteLine("Part 2:" + Part2(input));
+        System.Console.WriteLine("Part 1:" + Part1(["asdf"]));
+        System.Console.WriteLine("Part 2:" + Part2(["asdf"]));
     }
 
     static string Part1(string[] input)
