@@ -4,11 +4,15 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        System.Console.WriteLine("Advent of Code 2025 - Day 02");
-
+        var path = $"./data/example.txt";
         
-        System.Console.WriteLine("Part 1:" + Part1(["asdf"]));
-        System.Console.WriteLine("Part 2:" + Part2(["asdf"]));
+        var list = readFile(path).Split(",").ToList();
+
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+        
     }
 
     static string Part1(string[] input)
@@ -16,8 +20,8 @@ internal class Program
         return string.Join('\n', input);
     }
 
-    static string Part2(string[] input)
+    static string readFile(string path)
     {
-        return string.Join('\n', input);
+        return File.ReadAllText(path);
     }
 }
