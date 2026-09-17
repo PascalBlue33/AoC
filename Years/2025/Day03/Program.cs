@@ -4,20 +4,53 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        System.Console.WriteLine("Advent of Code 2025 - Day 03");
+        var path = $"./data/input.txt";
 
-        
-        System.Console.WriteLine("Part 1:" + Part1(input));
-        System.Console.WriteLine("Part 2:" + Part2(input));
+        var list = File.ReadAllLines(path);
+
+        long max = 0;
+
+        foreach (string line in list)
+        {
+            max += getBiggestCombination(line);
+        }
+
+        Console.WriteLine("Sum: " + max);
     }
 
-    static string Part1(string[] input)
+    static long getBiggestCombination(string number)
     {
-        return string.Join('\n', input);
-    }
+        int index = 0;
 
-    static string Part2(string[] input)
-    {
-        return string.Join('\n', input);
+        int max = 0;
+        for (int i = 0; i < number.Length - 1; i++)
+        {
+            char c = number[i];
+            int num = Convert.ToInt32(c.ToString());
+
+            if (num > max)
+            {
+                max = num;
+                index = i;
+            }
+        }
+
+        var newNumber = number.Substring(index + 1);
+
+        int max2 = 0;
+
+        foreach (char c in newNumber)
+        {
+            int num = Convert.ToInt32(c.ToString());
+
+            if (num > max2)
+            {
+                max2 = num;
+            }
+        }
+
+        var final = Convert.ToString(max) + Convert.ToString(max2);
+        Console.WriteLine($"Max1: {max}, Max2: {max2}, Final: {final}");
+        return Convert.ToInt64(final);
     }
 }
