@@ -8,9 +8,15 @@ internal class Program
 
         var list = File.ReadAllLines(path);
 
+        List<int> freshIds = new List<int>();
+
+        List<string> freshIdsRanges = new List<string>();
+
+        List<int> idsToCheck = new List<int>();
+
         foreach (string line in list)
         {
-            Console.WriteLine(line);
+            
         }
     }
 
