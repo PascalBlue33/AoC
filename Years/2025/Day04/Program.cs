@@ -10,21 +10,31 @@ internal class Program
 
         int counter = 0;
 
-        for (int i = 0; i < list.Length; i++)
+        bool hasChanged = true;
+
+        while (hasChanged)
         {
-            string line = list[i];
-            for (int j = 0; j < line.Length; j++)
+            hasChanged = false;
+            
+            for (int i = 0; i < list.Length; i++)
             {
-                char c = line[j];
-                if (c.ToString() == "@")
+                string line = list[i];
+                for (int j = 0; j < line.Length; j++)
                 {
-                    if (canTake(
-                        i > 0 ? list[i - 1] : null,
-                        list[i],
-                        i < list.Length - 1 ? list[i + 1] : null,
-                        j))
+                    char c = line[j];
+                    if (c.ToString() == "@")
                     {
-                        counter++;
+                        if (canTake(
+                            i > 0 ? list[i - 1] : null,
+                            list[i],
+                            i < list.Length - 1 ? list[i + 1] : null,
+                            j))
+                        {
+                            counter++;
+                            list[i] = list[i][..j] + "x" + list[i][(j + 1)..];
+
+                            hasChanged = true;
+                        }
                     }
                 }
             }
