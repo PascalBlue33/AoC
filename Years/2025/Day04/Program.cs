@@ -8,19 +8,50 @@ internal class Program
 
         var list = File.ReadAllLines(path);
 
-        foreach (string line in list)
+        int counter = 0;
+
+        for (int i = 0; i < list.Length; i++)
         {
-            Console.WriteLine(line);
+            string line = list[i];
+            for (int j = 0; j < line.Length; j++)
+            {
+                char c = line[j];
+                if (c.ToString() == "@")
+                {
+                    if (canTake(
+                        i > 0 ? list[i - 1] : null,
+                        list[i],
+                        i < list.Length - 1 ? list[i + 1] : null,
+                        j))
+                    {
+                        counter++;
+                    }
+                }
+            }
         }
+        Console.WriteLine(counter);
     }
 
-    static string read(string[] input)
+    static bool canTake(string? previousLine, string actualLine, string? nextLine, int index)
     {
-        return string.Join('\n', input);
-    }
+        int counter = 0;
 
-    static string Part2(string[] input)
-    {
-        return string.Join('\n', input);
+        for (int i = index - 1; i <= index + 1; i++)
+        {
+            if (i < 0 || i >= actualLine.Length)
+                continue;
+
+            if (previousLine != null && previousLine[i] == '@')
+                counter++;
+
+            if (nextLine != null && nextLine[i] == '@')
+                counter++;
+        }
+
+        if (index > 0 && actualLine[index - 1] == '@') counter++;
+
+        if (index < actualLine.Length - 1 && actualLine[index + 1] == '@') counter++;
+
+        return counter < 4;
     }
 }
