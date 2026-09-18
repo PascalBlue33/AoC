@@ -20,37 +20,35 @@ internal class Program
 
     static long getBiggestCombination(string number)
     {
-        int index = 0;
+        var n = "";
 
+        for (int i = 0; i < 12; i++)
+        {
+            var remaining = 12 - i;
+
+            var biggest = getBiggest(number, remaining);
+
+            int index = number.IndexOf(biggest);
+
+            number = number[(index + 1)..];
+
+            n += biggest;
+        }
+        return Convert.ToInt64(n);
+    }
+
+    static string getBiggest(string number, int remaining)
+    {
         int max = 0;
-        for (int i = 0; i < number.Length - 1; i++)
-        {
-            char c = number[i];
-            int num = Convert.ToInt32(c.ToString());
 
-            if (num > max)
-            {
-                max = num;
-                index = i;
-            }
+        for (int i = 0; i <= number.Length - remaining; i++)
+        {
+            char num = number[i];
+            var n = Convert.ToInt32(num.ToString());
+
+            if (n > max) max = n;
         }
 
-        var newNumber = number.Substring(index + 1);
-
-        int max2 = 0;
-
-        foreach (char c in newNumber)
-        {
-            int num = Convert.ToInt32(c.ToString());
-
-            if (num > max2)
-            {
-                max2 = num;
-            }
-        }
-
-        var final = Convert.ToString(max) + Convert.ToString(max2);
-        Console.WriteLine($"Max1: {max}, Max2: {max2}, Final: {final}");
-        return Convert.ToInt64(final);
+        return max.ToString();
     }
 }
