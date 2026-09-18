@@ -1,12 +1,14 @@
-﻿namespace ${PROJECT};
+﻿namespace ${PROJECT };
 
 internal class Program
 {
     public static void Main(string[] args)
     {
-        var data = File.ReadAllLines();
+        var path = $"./data/input.txt";
 
-        foreach(var line in data)
+        var list = File.ReadAllLines(path);
+
+        foreach (string line in list)
         {
             Console.WriteLine(line);
         }

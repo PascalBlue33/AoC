@@ -4,14 +4,17 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        System.Console.WriteLine("Advent of Code 2025 - Day 04");
+        var path = $"./data/input.txt";
 
-        
-        System.Console.WriteLine("Part 1:" + Part1(input));
-        System.Console.WriteLine("Part 2:" + Part2(input));
+        var list = File.ReadAllLines(path);
+
+        foreach (string line in list)
+        {
+            Console.WriteLine(line);
+        }
     }
 
-    static string Part1(string[] input)
+    static string read(string[] input)
     {
         return string.Join('\n', input);
     }
