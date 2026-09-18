@@ -4,14 +4,15 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        System.Console.WriteLine("Advent of Code ${YEAR} - Day ${DAY_PADDED}");
+        var data = File.ReadAllLines();
 
-        
-        System.Console.WriteLine("Part 1:" + Part1(input));
-        System.Console.WriteLine("Part 2:" + Part2(input));
+        foreach(var line in data)
+        {
+            Console.WriteLine(line);
+        }
     }
 
-    static string Part1(string[] input)
+    static string read(string[] input)
     {
         return string.Join('\n', input);
     }
