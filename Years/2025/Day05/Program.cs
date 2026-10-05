@@ -8,25 +8,49 @@ internal class Program
 
         var list = File.ReadAllLines(path);
 
-        List<int> freshIds = new List<int>();
+        List<long> freshIds = new List<long>();
 
-        List<string> freshIdsRanges = new List<string>();
+        int cutIndex = 0;
 
-        List<int> idsToCheck = new List<int>();
-
-        foreach (string line in list)
+        for (int i = 0; i < list.Length; i++)
         {
-            
+            string? line = list[i];
+            if (line == "")
+            {
+                cutIndex = i;
+            }
         }
-    }
 
-    static string read(string[] input)
-    {
-        return string.Join('\n', input);
-    }
+        var freshIdRanges = list[..cutIndex];
 
-    static string Part2(string[] input)
-    {
-        return string.Join('\n', input);
+        var idsToCheck = list[(cutIndex + 1)..];
+
+        foreach (string line in freshIdRanges)
+        {
+            long minValue = Convert.ToInt64(line.Split("-")[0]);
+            long maxValue = Convert.ToInt64(line.Split("-")[1]);
+
+            for (long i = minValue; i <= maxValue; i++)
+            {
+                if (!freshIds.Contains(i))
+                {
+                    freshIds.Add(i);
+                }
+            }
+        }
+
+        var counter = 0;
+
+        foreach (var idString in idsToCheck)
+        {
+            long id = Convert.ToInt64(idString);
+
+            if (freshIds.Contains(id))
+            {
+                counter += 1;
+            }
+
+        }
+        Console.WriteLine(counter);
     }
 }
