@@ -8,9 +8,9 @@ internal class Program
 
         var list = File.ReadAllLines(path);
 
-        List<long> freshIds = new List<long>();
-
         int cutIndex = 0;
+
+        var counter = 0;
 
         for (int i = 0; i < list.Length; i++)
         {
@@ -23,34 +23,23 @@ internal class Program
 
         var freshIdRanges = list[..cutIndex];
 
-        var idsToCheck = list[(cutIndex + 1)..];
+        List<string> idsToCheck = list[(cutIndex + 1)..].ToList();
 
         foreach (string line in freshIdRanges)
         {
             long minValue = Convert.ToInt64(line.Split("-")[0]);
             long maxValue = Convert.ToInt64(line.Split("-")[1]);
 
-            for (long i = minValue; i <= maxValue; i++)
+            foreach(var id in idsToCheck.ToList())
             {
-                if (!freshIds.Contains(i))
+                var idNum = Convert.ToInt64(id);
+                if (idNum >= minValue && idNum <= maxValue)
                 {
-                    freshIds.Add(i);
+                    counter++;
+                    idsToCheck.Remove(id);
                 }
             }
-        }
-
-        var counter = 0;
-
-        foreach (var idString in idsToCheck)
-        {
-            long id = Convert.ToInt64(idString);
-
-            if (freshIds.Contains(id))
-            {
-                counter += 1;
-            }
-
-        }
+        }        
         Console.WriteLine(counter);
     }
 }
